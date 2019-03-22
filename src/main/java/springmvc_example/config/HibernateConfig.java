@@ -13,7 +13,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "springmvc_example.config" })
@@ -23,7 +22,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactoryBean(){
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
-        sessionFactoryBean.setPackagesToScan(new String[] { "springmvc_example.model" });
+        sessionFactoryBean.setPackagesToScan("springmvc_example.model");
         sessionFactoryBean.setHibernateProperties(hibernateProperties());
 
         return sessionFactoryBean;
@@ -42,10 +41,10 @@ public class HibernateConfig {
 
     private Properties hibernateProperties(){
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "false");
-
+        properties.put("hibernate.hbm2ddl.auto","update");
         return properties;
     }
 

@@ -14,4 +14,6 @@ public interface UserService {
 
     public User findUserById(int id);
 
+    boolean authenticate(String username, String password);
+
 }

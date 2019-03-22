@@ -20,14 +20,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value="/user/", method=RequestMethod.GET, headers="Accept=application/json")
+    @RequestMapping(value="/users/", method=RequestMethod.GET, headers="Accept=application/json")
     public @ResponseBody List getListUser(){
         List users = userService.getListUser();
 
         return users;
     }
 
-    @RequestMapping(value="/user/{id}",method =RequestMethod.GET,headers = "Accept=application/json")
+    @RequestMapping(value="/users/{id}",method =RequestMethod.GET,headers = "Accept=application/json")
     public @ResponseBody User getUser(@PathVariable("id") int id){
         User user = userService.findUserById(id);
         return user;

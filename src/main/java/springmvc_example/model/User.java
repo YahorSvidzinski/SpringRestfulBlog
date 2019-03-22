@@ -1,15 +1,12 @@
 package springmvc_example.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.PreparedStatement;
-import java.util.Date;
+import java.util.*;
 
 @Data
 @Entity
@@ -20,11 +17,8 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name", nullable=true)
-    private String name;
-
-    @Column(name="surname",nullable = true)
-    private String surname;
+    @Column(name="username", nullable=true)
+    private String username;
 
     @Column(name="password",nullable = true)
     private String password;
@@ -34,8 +28,7 @@ public class User {
 
     @Column(name = "created_at",nullable = true)
     private Date date;
-
-
-
-
+    @JsonManagedReference
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Post> posts = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import springmvc_example.dao.UserDao;
 import springmvc_example.model.User;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService {
 
     public User findUserById(int id) {
         return userDao.findUserById(id);
+    }
+
+    @Override
+    public boolean authenticate(String username, String password) {
+        return Objects.equals(username,password);
     }
 
 }
